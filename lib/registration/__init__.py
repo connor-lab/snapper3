@@ -101,7 +101,7 @@ def register_sample(cur, sample_id, distances, new_snad, zscore_ignore, levels=[
                     sql = "SELECT "+t_lvl+"_mean FROM sample_clusters WHERE fk_sample_id=%s"
                     cur.execute(sql, (o_mem, ))
                     if cur.rowcount != 1:
-                        logging.error("Uncertain about clustering info for sample %s", cluster, t_lvl)
+                        logging.error("Uncertain about clustering info for sample %s %s", cluster, t_lvl)
                         return None
                     row = cur.fetchone()
                     old_mean = row[t_lvl+'_mean']
@@ -122,7 +122,7 @@ def register_sample(cur, sample_id, distances, new_snad, zscore_ignore, levels=[
 
     # end for lvl, cluster in zip(levels, new_snad):
 
-    sql = "INSERT INTO sample_clusters (fk_sample_id, t0, t5, t10, t25, t50, t100, t250, t0_mean, t5_mean, t10_mean, t25_mean, t50_mean, t100_mean, t250_mean) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO sample_clusters (fk_sample_id, t0, t2, t5, t10, t25, t50, t100, t250, t0_mean, t5_mean, t10_mean, t25_mean, t50_mean, t100_mean, t250_mean) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cur.execute(sql, (sample_id,
                       final_snad[levels[0]],
                       final_snad[levels[1]],
@@ -131,13 +131,15 @@ def register_sample(cur, sample_id, distances, new_snad, zscore_ignore, levels=[
                       final_snad[levels[4]],
                       final_snad[levels[5]],
                       final_snad[levels[6]],
+                      final_snad[levels[7]],
                       means[levels[0]],
                       means[levels[1]],
                       means[levels[2]],
                       means[levels[3]],
                       means[levels[4]],
                       means[levels[5]],
-                      means[levels[6]],))
+                      means[levels[6]],
+                      means[levels[7]],))
 
     return [final_snad[x] for x in levels]
 

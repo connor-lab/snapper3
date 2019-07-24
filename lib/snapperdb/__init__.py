@@ -84,10 +84,10 @@ def get_closest_samples(cur, distances):
     # returns None if sample is >250 away from closest neighbour
     nearest_t = get_closest_threshold(closest_distance)
 
-    sql = "SELECT t0, t5, t10, t25, t50, t100, t250 FROM sample_clusters WHERE fk_sample_id=%s"
+    sql = "SELECT t0, t2, t5, t10, t25, t50, t100, t250 FROM sample_clusters WHERE fk_sample_id=%s"
     cur.execute(sql, (closest_sample, ))
     row = cur.fetchone()
-    closest_snad = [row['t0'], row['t5'], row['t10'], row['t25'], row['t50'], row['t100'], row['t250']]
+    closest_snad = [row['t0'], [row['t2'] row['t5'], row['t10'], row['t25'], row['t50'], row['t100'], row['t250']]
 
     return {'closest_distance': closest_distance,
             'nearest_t': nearest_t,
@@ -96,7 +96,7 @@ def get_closest_samples(cur, distances):
 
 # --------------------------------------------------------------------------------------------------
 
-def get_new_snp_address(nbhood, levels=[0, 5, 10, 25, 50, 100, 250]):
+def get_new_snp_address(nbhood, levels=[0, 2, 5, 10, 25, 50, 100, 250]):
     """
     Get the proposed new SNP address for a sample based on it's neighbourhood.
 
@@ -106,7 +106,7 @@ def get_new_snp_address(nbhood, levels=[0, 5, 10, 25, 50, 100, 250]):
         {'closest_distance': int,
          'nearest_t': int,
          'closest_sample': int,
-         'closest_snad': [list of 7 ints]}
+         'closest_snad': [list of 8 ints]}
 
     Returns
     -------
@@ -129,7 +129,7 @@ def get_new_snp_address(nbhood, levels=[0, 5, 10, 25, 50, 100, 250]):
 
 # --------------------------------------------------------------------------------------------------
 
-def check_zscores(cur, distances, new_snad, merges, levels=[0, 5, 10, 25, 50, 100, 250]):
+def check_zscores(cur, distances, new_snad, merges, levels=[0, 2, 5, 10, 25, 50, 100, 250]):
     """
     Check the zscores of putting a new sample in the clusters proposed, considering merges.
 
@@ -294,7 +294,7 @@ def check_duplicate_clustering(cur, sample_id):
 
     """
 
-    sql = "SELECT t250, t100, t50, t25, t10, t5, t0 FROM sample_clusters WHERE fk_sample_id=%s"
+    sql = "SELECT t250, t100, t50, t25, t10, t5, t2, t0 FROM sample_clusters WHERE fk_sample_id=%s"
     cur.execute(sql, (sample_id, ))
     if cur.rowcount == 0:
         rc = 0
