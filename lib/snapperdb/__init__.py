@@ -87,7 +87,7 @@ def get_closest_samples(cur, distances):
     sql = "SELECT t0, t2, t5, t10, t25, t50, t100, t250 FROM sample_clusters WHERE fk_sample_id=%s"
     cur.execute(sql, (closest_sample, ))
     row = cur.fetchone()
-    closest_snad = [row['t0'], [row['t2'] row['t5'], row['t10'], row['t25'], row['t50'], row['t100'], row['t250']]
+    closest_snad = [row['t0'], [row['t2'], row['t5'], row['t10'], row['t25'], row['t50'], row['t100'], row['t250']]
 
     return {'closest_distance': closest_distance,
             'nearest_t': nearest_t,
