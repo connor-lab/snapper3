@@ -156,7 +156,7 @@ def main(args):
         cur.execute(sql, (args['ref_name'], datetime.now(), ))
         ref_pkid = cur.fetchone()[0]
 
-        logging.info("Created new sampe with id %s. ", ref_pkid)
+        logging.info("Created new sample with id %s. ", ref_pkid)
 
         for con, condata in data['positions'].iteritems():
             # get the pk of this contig
@@ -182,7 +182,7 @@ def main(args):
                          len(ref_ign_pos))
 
         # per definition the reference is in cluster 1,1,1,1,1,1,1
-        sql = "INSERT INTO sample_clusters (fk_sample_id, t0, t2, t5, t10, t25, t50, t100, t250) VALUES (%s, 1, 1, 1, 1, 1, 1, 1)"
+        sql = "INSERT INTO sample_clusters (fk_sample_id, t0, t2, t5, t10, t25, t50, t100, t250) VALUES (%s, 1, 1, 1, 1, 1, 1, 1, 1)"
         cur.execute(sql, (ref_pkid, ))
 
         # and these are the stats for these clusters
