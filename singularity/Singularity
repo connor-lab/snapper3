@@ -48,6 +48,10 @@ From: postgres:11
     curl -fsSL 'https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-1-0-gf15c1c3ef' | tar -xj -C /usr/local/bin
     find /usr/local/bin/GenomeAnalysisTK* -name "GenomeAnalysisTK.jar" -exec ln -s {} /usr/local/bin \;
 
+    # FastTree
+    curl -fsSL 'http://www.microbesonline.org/fasttree/FastTreeDbl' --output /usr/local/bin/FastTree
+    chmod +x /usr/local/bin/FastTree
+
 %environment
     export PICARD_JAR=/usr/local/bin/picard.jar
     export GATK_JAR=/usr/local/bin/GenomeAnalysisTK.jar
