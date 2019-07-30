@@ -147,7 +147,7 @@ def main(args):
             if data['annotations'].has_key('coverageMetaData') == False:
                 logging.error("Was asked to check coverage but no coverage annotation found in json file.")
                 return 1
-            cov_info = dict(item.split("=") for item in data['annotations']['coverageMetaData'].split(","))
+            cov_info = data['annotations']['coverageMetaData'][0]
             logging.info("The mean coverage for this sample is: %s", cov_info['mean'])
             if float(cov_info['mean']) < args['mcov']:
                 logging.error("The mean coverage for this sample is below the user specified threshold.")
