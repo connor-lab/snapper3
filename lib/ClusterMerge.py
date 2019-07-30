@@ -129,7 +129,7 @@ class ClusterMerge(object):
                             '-'.join([str(self.final_name) if x == self.t_level else str(r[x]) for x in levels]))
 
             # also write this to a table
-            sql = "INSERT INTO sample_history (fk_sample_id, t250_old, t100_old, t50_old, t25_old, t10_old, t5_old, t2_old, t0_old, t250_new, t100_new, t50_new, t25_new, t10_new, t5_new, t2_new, t0_new, renamed_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO sample_history (fk_sample_id, t250_old, t100_old, t50_old, t25_old, t10_old, t5_old, t2_old, t0_old, t250_new, t100_new, t50_new, t25_new, t10_new, t5_new, t2_new, t0_new, renamed_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             cur.execute(sql ,(r['pk_id'], \
                               r['t250'], r['t100'], r['t50'], r['t25'], r['t10'], r['t5'], r['t2'], r['t0'], \
                               self.final_name if self.t_level == 't250' else r['t250'], \
