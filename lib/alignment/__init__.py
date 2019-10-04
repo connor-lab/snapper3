@@ -465,7 +465,7 @@ def get_snp_addresses(db, samples):
         cur.execute(sql, (tuple(samples), ))
         rows = cur.fetchall()
         for r in rows:
-            snads[r['sample_name']] = "%i.%i.%i.%i.%i.%i.%i" \
+            snads[r['sample_name']] = "%i.%i.%i.%i.%i.%i.%i.%i" \
                           % (r['t250'], r['t100'], r['t50'], r['t25'], r['t10'], r['t5'], r['t2'], r['t0'])
 
     except psycopg2.Error as e:
