@@ -203,7 +203,7 @@ def main(args):
         cur.execute(sql, (args['sample_name'], molis_id, ngs_id, datetime.now()))
         sample_pkid = cur.fetchone()[0]
 
-        logging.info("Created new sampe with id %s. ", sample_pkid)
+        logging.info("Created new sample with id %s. ", sample_pkid)
 
         for con, condata in data['positions'].iteritems():
             # get the pk of this contig
