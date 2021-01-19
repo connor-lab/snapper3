@@ -83,7 +83,15 @@ def get_args():
                       metavar="NAME",
                       default=None,
                       dest="sample_name",
-                      help="The name of the sample to go into the db [default: input file name before 1st dot]")
+                      help="The UUID of the sample to go into the db [default: input file name before 1st dot]")
+    
+    args.add_argument("--sample-accession",
+                      "-a",
+                      type=str,
+                      metavar="ACCESSION",
+                      default=None,
+                      dest="sample_accession",
+                      help="The accession number of the sample [default: None]")
 
     args.add_argument("--reference",
                       type=str,
