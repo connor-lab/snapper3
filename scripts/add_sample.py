@@ -181,12 +181,13 @@ def main(args):
     if args['sample_name'] == None:
         args['sample_name'] = os.path.basename(args['input']).split('.')[0]
 
-    ngs_id = None
+    # Set ngs_id to args.sample_accession to preserve PHE db structure but fit PHW sample ids
+    ngs_id = args['sample_accession']
     molis_id = None
     # if this is the format <int>_H<int>-[12] add ngs_id and molis_id into db
     pat="^[0-9]+_H[0-9]+-[12]$"
     if re.search(pat, args['sample_name']) != None:
-        ngs_id = int(args['sample_name'].split('_')[0])
+        #ngs_id = int(args['sample_name'].split('_')[0])
         molis_id = args['sample_name'].split('_')[1][:-2]
 
     try:
